@@ -6,7 +6,7 @@ import com.example.to_doapp.utils.Constants
 
 @Entity(tableName = Constants.DATABASE_TABLE)
 data class ToDoTask(
-    @PrimaryKey val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val title: String,
     val description: String,
     val priority: Priority,
