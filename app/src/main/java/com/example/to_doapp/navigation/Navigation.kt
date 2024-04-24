@@ -19,5 +19,4 @@ fun SetupNavigation(navController: NavHostController) {
         listComposable(navigateToTaskScreen = screen.task)
         taskComposable(navigateToHomeScreen = screen.list)
     }
-
 }
