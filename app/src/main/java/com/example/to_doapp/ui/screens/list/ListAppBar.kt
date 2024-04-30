@@ -53,7 +53,7 @@ fun ListAppBar(
             DefaultListAppbar(onSearchClicked = {
                 sharedViewModel.searchAppBarState.value = SearchAppBarState.OPENED
                 sharedViewModel.searchTextState.value = ""
-            }, onSortClicked = {})
+            }, onSortClicked = {}, onDeleteClicked = {})
 
         }
 
@@ -71,7 +71,9 @@ fun ListAppBar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DefaultListAppbar(onSearchClicked: () -> Unit, onSortClicked: (Priority) -> Unit) {
+fun DefaultListAppbar(
+    onSearchClicked: () -> Unit, onSortClicked: (Priority) -> Unit, onDeleteClicked: () -> Unit
+) {
     TopAppBar(title = {
         Text(text = "Tasks")
     }, colors = TopAppBarDefaults.topAppBarColors(
@@ -81,15 +83,21 @@ fun DefaultListAppbar(onSearchClicked: () -> Unit, onSortClicked: (Priority) -> 
         actionIconContentColor = MaterialTheme.colorScheme.surface,
         navigationIconContentColor = MaterialTheme.colorScheme.surface
     ), actions = {
-        ListAppbarActions(onSearchClicked = onSearchClicked, onSortClicked = onSortClicked)
+        ListAppbarActions(
+            onSearchClicked = onSearchClicked,
+            onSortClicked = onSortClicked,
+            onDeleteClicked = onDeleteClicked
+        )
     })
 }
 
 @Composable
-fun ListAppbarActions(onSearchClicked: () -> Unit, onSortClicked: (Priority) -> Unit) {
+fun ListAppbarActions(
+    onSearchClicked: () -> Unit, onSortClicked: (Priority) -> Unit, onDeleteClicked: () -> Unit
+) {
     SearchAction(onSearchClicked = onSearchClicked)
     SortAction(onSortClicked = onSortClicked)
-    DeleteAllAction(onDeleteClicked = {})
+    DeleteAllAction(onDeleteClicked = onDeleteClicked)
 }
 
 @Composable
@@ -221,5 +229,5 @@ fun SearchAppBar(
 @Preview(wallpaper = Wallpapers.GREEN_DOMINATED_EXAMPLE, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun DefaultListAppBarPrev() {
-    DefaultListAppbar(onSearchClicked = {}, onSortClicked = {})
+    DefaultListAppbar(onSearchClicked = {}, onSortClicked = {}, onDeleteClicked = {})
 }
