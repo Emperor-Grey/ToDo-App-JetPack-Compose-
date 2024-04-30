@@ -6,18 +6,26 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.Wallpapers
 import com.example.to_doapp.R
+import com.example.to_doapp.ui.theme.ViewModels.SharedViewModel
+import com.example.to_doapp.utils.SearchAppBarState
 
 @Composable
 fun ListScreen(
-    navigateToTaskScreens: (Int) -> Unit
+    navigateToTaskScreens: (Int) -> Unit, sharedViewModel: SharedViewModel
 ) {
+    val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
+    val searchTextSate: String by sharedViewModel.searchTextState
+
     Scaffold(modifier = Modifier, topBar = {
-        ListAppBar()
+        ListAppBar(
+            sharedViewModel = sharedViewModel,
+            searchAppBarState = searchAppBarState,
+            searchTextSate = searchTextSate
+        )
     }, floatingActionButton = {
         ListFab(onFabClicked = navigateToTaskScreens)
     }) { paddingValues ->
@@ -34,10 +42,4 @@ fun ListFab(onFabClicked: (Int) -> Unit) {
             imageVector = Icons.Filled.Add, contentDescription = stringResource(R.string.add_button)
         )
     }
-}
-
-@Preview(showBackground = true, wallpaper = Wallpapers.GREEN_DOMINATED_EXAMPLE)
-@Composable
-private fun ListScreenPrev() {
-    ListScreen(navigateToTaskScreens = {})
 }
