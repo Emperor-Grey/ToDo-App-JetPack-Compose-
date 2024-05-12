@@ -2,4 +2,11 @@
     <string name="app_name">To-Do App</string>
     <string name="add_button">Add Button</string>
     <string name="search_tasks">Search Tasks</string>
+    <string name="delete_all">Delete All</string>
+    <string name="choose_priority">Choose Priority</string>
+    <string name="search">Search</string>
+    <string name="close">Close</string>
+    <string name="search_for_a_task">Search for a task…</string>
+    <string name="sad_face_icon">Sad Face Icon</string>
+    <string name="no_tasks_found">No Tasks Found.</string>
 </resources>

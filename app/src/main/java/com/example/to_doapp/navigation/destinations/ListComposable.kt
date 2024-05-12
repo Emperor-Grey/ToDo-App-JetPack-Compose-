@@ -11,12 +11,11 @@ import com.example.to_doapp.utils.Constants.LIST_SCREEN
 
 
 fun NavGraphBuilder.listComposable(
-    navigateToTaskScreen: (Int) -> Unit
-    ,sharedViewModel: SharedViewModel
+    navigateToTaskScreen: (Int) -> Unit, sharedViewModel: SharedViewModel
 ) {
     composable(route = LIST_SCREEN, arguments = listOf(navArgument(LIST_ARGUMENT_KEY) {
         type = NavType.StringType
     })) {
-        ListScreen(navigateToTaskScreens = navigateToTaskScreen,sharedViewModel = sharedViewModel)
+        ListScreen(navigateToTaskScreen = navigateToTaskScreen, sharedViewModel = sharedViewModel)
     }
 }

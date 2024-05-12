@@ -1,11 +1,14 @@
 package com.example.to_doapp.ui.screens.list
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -15,10 +18,15 @@ import com.example.to_doapp.utils.SearchAppBarState
 
 @Composable
 fun ListScreen(
-    navigateToTaskScreens: (Int) -> Unit, sharedViewModel: SharedViewModel
+    navigateToTaskScreen: (taskId: Int) -> Unit, sharedViewModel: SharedViewModel
 ) {
+    val allTasks by sharedViewModel.allTasks.collectAsState()
     val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
     val searchTextSate: String by sharedViewModel.searchTextState
+
+    LaunchedEffect(key1 = true) {
+        sharedViewModel.getAllTasks()
+    }
 
     Scaffold(modifier = Modifier, topBar = {
         ListAppBar(
@@ -27,10 +35,14 @@ fun ListScreen(
             searchTextSate = searchTextSate
         )
     }, floatingActionButton = {
-        ListFab(onFabClicked = navigateToTaskScreens)
-    }) { paddingValues ->
-        val padding = paddingValues
-    }
+        ListFab(onFabClicked = navigateToTaskScreen)
+    }, content = { paddingValues ->
+        ListContent(
+            tasks = allTasks,
+            navigateToTaskScreen = navigateToTaskScreen,
+            modifier = Modifier.padding(paddingValues)
+        )
+    })
 }
 
 @Composable

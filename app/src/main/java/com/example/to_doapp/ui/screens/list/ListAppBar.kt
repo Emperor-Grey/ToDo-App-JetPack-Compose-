@@ -107,7 +107,10 @@ fun SortAction(onSortClicked: (Priority) -> Unit) {
     }
 
     IconButton(onClick = { isExpanded = true }) {
-        Icon(imageVector = Icons.Default.FilterList, contentDescription = "Choose Priority")
+        Icon(
+            imageVector = Icons.Default.FilterList,
+            contentDescription = stringResource(R.string.choose_priority)
+        )
         DropdownMenu(expanded = isExpanded, onDismissRequest = { isExpanded = false }, content = {
             DropdownMenuItem(text = {
                 PriorityItem(priority = Priority.LOW)
@@ -149,11 +152,14 @@ fun DeleteAllAction(onDeleteClicked: () -> Unit) {
         mutableStateOf(false)
     }
     IconButton(onClick = { isExpanded = true }) {
-        Icon(imageVector = Icons.Default.MoreVert, contentDescription = "Choose Priority")
+        Icon(
+            imageVector = Icons.Default.MoreVert,
+            contentDescription = stringResource(R.string.choose_priority)
+        )
         DropdownMenu(expanded = isExpanded, onDismissRequest = { isExpanded = false }, content = {
             DropdownMenuItem(text = {
                 Text(
-                    text = "Delete All", modifier = Modifier.padding(
+                    text = stringResource(R.string.delete_all), modifier = Modifier.padding(
                         LARGE_PADDING
                     ), style = MaterialTheme.typography.titleSmall
                 )
@@ -195,30 +201,35 @@ fun SearchAppBar(
             onSearch = {
                 onSearchClicked(it)
             },
-            placeholder = { Text(text = "Search for a task...") },
+            placeholder = { Text(text = stringResource(R.string.search_for_a_task)) },
             leadingIcon = {
                 Icon(
-                    imageVector = Icons.Default.Search, contentDescription = "Search"
+                    imageVector = Icons.Default.Search,
+                    contentDescription = stringResource(R.string.search)
                 )
             },
             trailingIcon = {
-                Icon(modifier = Modifier.clickable {
-                    when (trailingIconState) {
-                        TrailingIconState.READY_TO_DELETE -> {
-                            onTextChanged("")
-                            trailingIconState = TrailingIconState.READY_TO_CLOSE
-                        }
-
-                        TrailingIconState.READY_TO_CLOSE -> {
-                            if (text.isNotEmpty()) {
+                Icon(
+                    modifier = Modifier.clickable {
+                        when (trailingIconState) {
+                            TrailingIconState.READY_TO_DELETE -> {
                                 onTextChanged("")
-                            } else {
-                                onCloseClicked()
-                                trailingIconState = TrailingIconState.READY_TO_DELETE
+                                trailingIconState = TrailingIconState.READY_TO_CLOSE
+                            }
+
+                            TrailingIconState.READY_TO_CLOSE -> {
+                                if (text.isNotEmpty()) {
+                                    onTextChanged("")
+                                } else {
+                                    onCloseClicked()
+                                    trailingIconState = TrailingIconState.READY_TO_DELETE
+                                }
                             }
                         }
-                    }
-                }, imageVector = Icons.Default.Close, contentDescription = "Close")
+                    },
+                    imageVector = Icons.Default.Close,
+                    contentDescription = stringResource(R.string.close)
+                )
 
             },
             active = true,
