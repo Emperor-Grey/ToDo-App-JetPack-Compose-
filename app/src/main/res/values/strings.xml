@@ -9,4 +9,7 @@
     <string name="search_for_a_task">Search for a task…</string>
     <string name="sad_face_icon">Sad Face Icon</string>
     <string name="no_tasks_found">No Tasks Found.</string>
+    <string name="add_task">Add Task</string>
+    <string name="back_icon">Back Icon</string>
+    <string name="add_action">Add action</string>
 </resources>

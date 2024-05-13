@@ -27,19 +27,22 @@ import com.example.to_doapp.data.models.ToDoTask
 import com.example.to_doapp.ui.theme.LARGE_PADDING
 import com.example.to_doapp.ui.theme.PRIORITY_INDICATOR_SIZE
 import com.example.to_doapp.ui.theme.TASK_ITEM_ELEVATION
+import com.example.to_doapp.utils.RequestState
 
 @Composable
 fun ListContent(
-    tasks: List<ToDoTask>, navigateToTaskScreen: (taskId: Int) -> Unit, modifier: Modifier
+    tasks: RequestState<List<ToDoTask>>,
+    navigateToTaskScreen: (taskId: Int) -> Unit,
+    modifier: Modifier
 ) {
-    if (tasks.isEmpty()) {
-        EmptyContent()
-    } else {
-        DisplayTasks(
-            tasks = tasks,
-            navigateToTaskScreen = navigateToTaskScreen,
-            modifier = modifier
-        )
+    if (tasks is RequestState.Success) {
+        if (tasks.data.isEmpty()) {
+            EmptyContent()
+        } else {
+            DisplayTasks(
+                tasks = tasks.data, navigateToTaskScreen = navigateToTaskScreen, modifier = modifier
+            )
+        }
     }
 }
 
