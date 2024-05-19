@@ -13,7 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.to_doapp.R
-import com.example.to_doapp.ui.theme.ViewModels.SharedViewModel
+import com.example.to_doapp.ui.ViewModels.SharedViewModel
 import com.example.to_doapp.utils.SearchAppBarState
 
 @Composable
