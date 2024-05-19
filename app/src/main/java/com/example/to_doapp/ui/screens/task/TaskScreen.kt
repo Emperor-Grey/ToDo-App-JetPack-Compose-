@@ -8,7 +8,7 @@ import com.example.to_doapp.utils.Action
 fun TaskScreen(navigateToListScreen: (Action) -> Unit) {
     Scaffold(topBar = {
         TaskAppBar(navigateToListScreen = navigateToListScreen)
-    }, content = {
-        val padding = it
+    }, content = { padValues ->
+        val padding = padValues
     })
 }
