@@ -1,9 +1,11 @@
-package com.example.to_doapp.ui.theme.ViewModels
+package com.example.to_doapp.ui.ViewModels
 
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.to_doapp.data.models.Priority
 import com.example.to_doapp.data.models.ToDoTask
 import com.example.to_doapp.data.repositories.ToDoRepository
 import com.example.to_doapp.utils.RequestState
@@ -18,6 +20,11 @@ import javax.inject.Inject
 class SharedViewModel @Inject constructor(
     private val repository: ToDoRepository
 ) : ViewModel() {
+
+    private val id: MutableState<Int> = mutableIntStateOf(0)
+    val title: MutableState<String> = mutableStateOf("")
+    val description: MutableState<String> = mutableStateOf("")
+    val priority: MutableState<Priority> = mutableStateOf(Priority.LOW)
 
     val searchAppBarState: MutableState<SearchAppBarState> =
         mutableStateOf(SearchAppBarState.CLOSED)
@@ -47,6 +54,20 @@ class SharedViewModel @Inject constructor(
             repository.getSelectedTask(taskId).collect { task ->
                 _selectedTasks.value = task
             }
+        }
+    }
+
+    fun updateTaskFields(selectedTasks: ToDoTask?) {
+        if (selectedTasks != null) {
+            id.value = selectedTasks.id
+            title.value = selectedTasks.title
+            description.value = selectedTasks.description
+            priority.value = selectedTasks.priority
+        } else {
+            id.value = 0
+            title.value = ""
+            description.value = ""
+            priority.value = Priority.LOW
         }
     }
 }
