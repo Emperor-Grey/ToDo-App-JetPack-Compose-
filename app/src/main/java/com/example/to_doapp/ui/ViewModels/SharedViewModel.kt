@@ -38,4 +38,15 @@ class SharedViewModel @Inject constructor(
             _allTasks.value = RequestState.Error(e)
         }
     }
+
+    private val _selectedTasks: MutableStateFlow<ToDoTask?> = MutableStateFlow(null)
+    val selectedTasks: StateFlow<ToDoTask?> = _selectedTasks
+
+    fun getSelectedTask(taskId: Int) {
+        viewModelScope.launch {
+            repository.getSelectedTask(taskId).collect { task ->
+                _selectedTasks.value = task
+            }
+        }
+    }
 }

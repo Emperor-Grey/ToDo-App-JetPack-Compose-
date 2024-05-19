@@ -22,8 +22,12 @@ import com.example.to_doapp.data.models.ToDoTask
 import com.example.to_doapp.utils.Action
 
 @Composable
-fun TaskAppBar(navigateToListScreen: (Action) -> Unit) {
-    NewTaskAppBar(navigateToListScreen = navigateToListScreen)
+fun TaskAppBar(navigateToListScreen: (Action) -> Unit, selectedTask: ToDoTask?) {
+    if (selectedTask == null) {
+        NewTaskAppBar(navigateToListScreen = navigateToListScreen)
+    } else {
+        ExistingTaskAppBar(navigateToListScreen = navigateToListScreen, selectedTask = selectedTask)
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -46,9 +50,10 @@ fun NewTaskAppBar(navigateToListScreen: (Action) -> Unit) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExistingTaskAppBar(navigateToListScreen: (Action) -> Unit, selectedTask: ToDoTask) {
-    TopAppBar(navigationIcon = {
-        CloseAction(onCloseClicked = navigateToListScreen)
-    },
+    TopAppBar(
+        navigationIcon = {
+            CloseAction(onCloseClicked = navigateToListScreen)
+        },
         title = { Text(text = selectedTask.title, maxLines = 1, overflow = TextOverflow.Ellipsis) },
         actions = {
             DeleteAction(onDeleteClicked = navigateToListScreen)
