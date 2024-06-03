@@ -114,8 +114,8 @@ class SharedViewModel @Inject constructor(
                 TODO()
             }
 
-            Action.NO_ACTION -> {
-                TODO()
+            else -> {
+                // Eat 5 star and do nothing
             }
         }
         this.action.value = Action.NO_ACTION
