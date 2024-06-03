@@ -23,6 +23,7 @@ fun TaskScreen(
     val description: String by sharedViewModel.description
     val priority: Priority by sharedViewModel.priority
 
+
     val context = LocalContext.current
 
 
@@ -45,6 +46,7 @@ fun TaskScreen(
             title = title,
             onTitleChange = {
                 sharedViewModel.updateTitle(it)
+
             },
             description = description,
             onDescriptionChange = {
