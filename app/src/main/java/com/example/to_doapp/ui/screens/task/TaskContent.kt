@@ -61,8 +61,7 @@ fun TaskContent(
 @Preview(showBackground = true)
 @Composable
 private fun TaskContentPrev() {
-    TaskContent(
-        modifier = Modifier,
+    TaskContent(modifier = Modifier,
         title = "",
         onTitleChange = {},
         description = "",

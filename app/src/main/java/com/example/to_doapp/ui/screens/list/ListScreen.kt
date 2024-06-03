@@ -13,16 +13,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.to_doapp.R
-import com.example.to_doapp.ui.ViewModels.SharedViewModel
+import com.example.to_doapp.ui.viewmodel.SharedViewModel
 import com.example.to_doapp.utils.SearchAppBarState
 
 @Composable
 fun ListScreen(
     navigateToTaskScreen: (taskId: Int) -> Unit, sharedViewModel: SharedViewModel
 ) {
+
+    val action = sharedViewModel.action.value
+
     val allTasks by sharedViewModel.allTasks.collectAsState()
     val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
     val searchTextSate: String by sharedViewModel.searchTextState
+
+    sharedViewModel.handleDatabaseActions(action = action)
 
     LaunchedEffect(key1 = true) {
         sharedViewModel.getAllTasks()

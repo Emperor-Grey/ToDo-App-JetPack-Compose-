@@ -39,8 +39,8 @@ import androidx.compose.ui.tooling.preview.Wallpapers
 import com.example.to_doapp.R
 import com.example.to_doapp.components.PriorityItem
 import com.example.to_doapp.data.models.Priority
-import com.example.to_doapp.ui.ViewModels.SharedViewModel
 import com.example.to_doapp.ui.theme.LARGE_PADDING
+import com.example.to_doapp.ui.viewmodel.SharedViewModel
 import com.example.to_doapp.utils.SearchAppBarState
 import com.example.to_doapp.utils.TrailingIconState
 

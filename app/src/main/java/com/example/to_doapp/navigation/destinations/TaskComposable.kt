@@ -7,8 +7,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.to_doapp.ui.ViewModels.SharedViewModel
 import com.example.to_doapp.ui.screens.task.TaskScreen
+import com.example.to_doapp.ui.viewmodel.SharedViewModel
 import com.example.to_doapp.utils.Action
 import com.example.to_doapp.utils.Constants
 import com.example.to_doapp.utils.Constants.TASK_ARGUMENT_KEY
@@ -27,7 +27,7 @@ fun NavGraphBuilder.taskComposable(
         sharedViewModel.getSelectedTask(taskId = taskId)
         val selectedTask by sharedViewModel.selectedTasks.collectAsState()
 
-        LaunchedEffect(key1 = taskId) {
+        LaunchedEffect(key1 = selectedTask) {
             sharedViewModel.updateTaskFields(selectedTasks = selectedTask)
         }
 
